@@ -40,6 +40,8 @@ define([
 				var i;
 				for (i = 0; i < 5; i++) {
 					this.collection.add(new CommentModel({
+						//Add an id to the model so calls to model.isNew() dont fail
+						id: i+1,
 						text: 'Random comment ' + Math.floor(Math.random() * 100),
 						author: 'serif'
 					}));
