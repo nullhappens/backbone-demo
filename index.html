@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Backbone demo</title>
+		<title>Require-js demo</title>
 		<link rel="stylesheet" href="css/demo.css" type="text/css" media="screen" />
-		
-		<!-- Base libraries -->
-		<script type="text/javascript" src="lib/jquery.js"></script>
-		<script type="text/javascript" src="lib/underscore.js"></script>
-		<script type="text/javascript" src="lib/json2.js"></script>
-		<script type="text/javascript" src="lib/backbone.js"></script>
-		<script type="text/javascript" src="lib/mustache.js"></script>
-		
+
 		<!-- Embedded templates -->
 		<script type="text/jquery-x-template" id="comment-template">
 			<button class="edit">Edit</button>
@@ -29,15 +22,7 @@
 			</form>
 		</script>
 		
-		<!-- Application files -->
-		<script type="text/javascript" src="js/model/commentmodel.js"></script>
-		<script type="text/javascript" src="js/model/commentcollection.js"></script>
-		<script type="text/javascript" src="js/view/commentview.js"></script>
-		<script type="text/javascript" src="js/view/formview.js"></script>
-		<script type="text/javascript" src="js/view/listview.js"></script>
-		<script type="text/javascript" src="js/view/newbuttonview.js"></script>
-		<script type="text/javascript" src="js/view/randombuttonview.js"></script>
-		<script type="text/javascript" src="js/app/app.js"></script>
+		
 	</head>
 	<body>
 		<!-- Application container element -->
@@ -47,10 +32,6 @@
 			<ul class="commentlist"></ul>
 		</div>
 		<!-- Application init -->
-		<script type="text/javascript" charset="utf-8">
-			new App({
-				el: $('#application')
-			});
-		</script>
+		<script data-main="js/main.js" src="js/lib/require.js"></script>
 	</body>
 </html>

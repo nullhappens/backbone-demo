@@ -6,14 +6,22 @@
  * @extends Backbone.Collection
  * @author Bodnar Istvan <istvan@gawker.com>
  */
-/*global CommentModel */
-var CommentCollection = Backbone.Collection.extend(
-/** @lends CommentCollection.prototype */
-	{
-		/**
-		 * Sets the allowed type of contained models
-		 * @type Backbone.Model
-		 */
-		model: CommentModel
-	}
-);
+define([
+	'underscore',
+	'backbone',
+	'commentmodel'
+], function(_,Backbone,CommentModel){
+	var CommentCollection = Backbone.Collection.extend(
+	/** @lends CommentCollection.prototype */
+		{
+			/**
+			 * Sets the allowed type of contained models
+			 * @type Backbone.Model
+			 */
+			model: CommentModel
+		}
+	);
+
+	//Return the module for further utilization
+	return CommentCollection;
+});
