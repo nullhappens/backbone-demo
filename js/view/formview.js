@@ -10,9 +10,8 @@ define([
 	'underscore',
 	'backbone',
 	'mustache',
-	'commentview',
 	'commentmodel'
-],function($,_,Backbone,Mustache,CommentView,CommentModel){
+],function($,_,Backbone,Mustache,CommentModel){
 	var FormView = Backbone.View.extend(
 	/** @lends FormView.prototype */
 		{
