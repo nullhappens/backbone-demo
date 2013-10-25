@@ -1,5 +1,5 @@
 /**
- * Comment form controller and view
+ * Comment form controller and view implemented as a requirejs singleton for reusing the form throughout.
  *
  * @class FormView
  * @extends Backbone.View
@@ -39,13 +39,20 @@ define([
 			},
 			
 			/**
-			 * View init method, subscribing to model events
+			 * View init method
 			 */
 			initialize: function () {
+				
+			},
+			/**
+			 * View bind events method.  Binds to the model events as well as the jquery events setup in 
+			 * this.events
+			 */
+			bindEvents: function(){
 				this.model.on('change', this.updateFields, this);
 				this.model.on('destroy', this.remove, this);
-			},
-			
+				this.delegateEvents(this.events);
+			},			
 			/**
 			 * Render form element from a template using Mustache
 			 * @returns {FormView} Returns the view instance itself, to allow chaining view commands.
@@ -125,20 +132,14 @@ define([
 			},
 			
 			/**
-			 * Override the default view remove method with custom actions
+			 * Remove the form from the DOM
 			 */
 			remove: function () {
-				// unsubscribe from all model events with this context
-				this.model.off(null, null, this);
-				
-				// delete container form DOM
 				this.$el.remove();
-				
-				// call backbones default view remove method
-				Backbone.View.prototype.remove.call(this);
 			}
 		}
 	);
-
-	return FormView;
+	
+	//requirejs will return and manage a single instance of this module when loading.
+	return new FormView();
 });

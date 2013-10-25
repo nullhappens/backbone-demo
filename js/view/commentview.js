@@ -73,13 +73,15 @@ define([
 			 * Edit button click handler
 			 * @returns {Boolean} Returns false to stop propagation
 			 */
-			edit: function () {
-				// create new FormView instance to edit the comment
-				var formview = new FormView({model: this.model});
+			edit: function () {				
+				// request an instance of the FormView singleton
+				FormView.model = this.model;
+				FormView.bindEvents();
+
 				// insert FormView instance after the comment container
-				this.$el.after(formview.render().$el);
+				this.$el.after(FormView.render().$el);
 				// listen to save success event to handle successful form submit event
-				formview.on('success', this.handleEditSuccess, this);
+				FormView.on('success', this.handleEditSuccess, this);
 				return false;
 			},
 			
@@ -118,6 +120,7 @@ define([
 										.addClass('notification');
 				
 				// append notification to edited comments container element
+				console.log(this.$el);
 				this.$el.append($notification);
 				
 				// remove notification after 5 seconds

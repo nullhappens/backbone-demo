@@ -42,11 +42,12 @@ define([
 				var comment = new CommentModel({});
 			
 				// render form view right after new button
-				var formview = new FormView({model: comment});
-				this.$el.after(formview.render().$el);
+				FormView.model = comment;
+				FormView.bindEvents();
+				this.$el.after(FormView.render().$el);
 			
 				// add saved model to collection after form was submitted successfully
-				formview.on('success', this.handleFormSuccess, this);
+				FormView.on('success', this.handleFormSuccess, this);
 			
 				// finally, return false to stop event propagation
 				return false;
