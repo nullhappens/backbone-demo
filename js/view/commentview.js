@@ -117,7 +117,6 @@ define([
 										.addClass('notification');
 				
 				// append notification to edited comments container element
-				console.log(this.$el);
 				this.$el.append($notification);
 				
 				// remove notification after 5 seconds
