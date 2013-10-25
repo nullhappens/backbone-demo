@@ -16,31 +16,58 @@ define([
 	/** @lends CommentlistView.prototype */
 		{
 			/**
-			 * Subscribe to collection 'reset' and 'add' events
+			 * Subscribe to add and delete events from model collection
+			 * Initialize a collection that holds CommentViews (1 per model in collection)
 			 */
 			initialize: function () {
-				this.collection.on('add reset', this.render, this);
+    			// bind the functions 'add' to view
+    			_(this).bindAll('add');
+
+    			// bind this view to the add and remove events of the collection
+        		this.collection.bind('add', this.add,this);
+
+				// we will hold a collection of CommentViews to handle rendering
+				this._commentViewList = [];
+
+				// for each model we add a CommentView into our commentListView collection
+    			this.collection.each(this.add);
 			},
-									
 			/**
-			 * Render comments using CommentView instances for each model in the collection.
-			 * @returns {CommentlistView} Returns the view instance itself, to allow chaining view commands.
+			 * This method is called whenever our collection has an element added. Adds a new CommentView
+			 * to the commentViewList and renders it appropriately delegating to its render method.
+			 */
+			add: function(item){
+				// create new CommentView instance
+				var commentView = new CommentView({
+					model: item
+				});
+
+				//Push instance into commentViewList
+				this._commentViewList.push(commentView);
+
+				// Handle rendering
+				if(this._rendered){
+					this.$el.append(commentView.render().el);
+				}				
+			},
+			/**
+			 * Render comments stored in commentViewList
 			 */
 			render: function () {
+				// keep track if the view is rendered
+				this._rendered = true;
+				
 				// first clean up the container
 				this.$el.empty();
 				
-				// iterate over models in collection and render comments using the CommentView view class
-				this.collection.each(function (item) {
-					// create new CommentView instance
-					var commentview = new CommentView({
-						model: item
-					});
-					
-					// append rendered CommentView instance to CommentlistViews container
-					this.$el.append(commentview.render().$el);
-				}, this);
-				
+				_this = this;
+				// iterate over collection of views and delegate rendering to each view				
+				_(this._commentViewList).each(function(view){
+
+					//append rendered commentView to DOM
+					_this.$el.append(view.render().el);
+				});
+
 				return this;
 			}
 		}

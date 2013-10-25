@@ -136,6 +136,14 @@ define([
 			 */
 			remove: function () {
 				this.$el.remove();
+			},
+			/**
+			 * Reset singleton model, clear all 'success' events. rebind events
+			 */
+			resetInstance: function(model){
+				this.model = model;
+				this.off('success');
+				this.delegateEvents();
 			}
 		}
 	);

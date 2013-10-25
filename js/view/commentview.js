@@ -47,7 +47,7 @@ define([
 			 */
 			initialize: function () {
 				this.model.on('change', this.render, this);
-				this.model.on('destroy', this.remove, this);
+				//this.model.on('destroy', this.remove, this);
 			},
 			
 			/**
@@ -74,9 +74,11 @@ define([
 			 * @returns {Boolean} Returns false to stop propagation
 			 */
 			edit: function () {				
-				// request an instance of the FormView singleton
-				FormView.model = this.model;
-				FormView.bindEvents();
+				// request and reset instance of the FormView singleton
+				FormView.resetInstance(this.model);
+
+				// rebind events
+				FormView.delegateEvents();
 
 				// insert FormView instance after the comment container
 				this.$el.after(FormView.render().$el);
@@ -90,12 +92,7 @@ define([
 			 * @returns {Boolean} Returns false to stop propagation
 			 */
 			delete: function () {
-				// delete model from memory
-				this.model.id = undefined;
-				this.model.destroy();
-
-				// note: since the view is subscribed to the models 'destroy' event, view will be also removed
-				// automatically, no need to delete container form DOM
+				this.remove();
 				return false;
 			},
 			
@@ -127,14 +124,6 @@ define([
 				setTimeout(function () {
 					$notification.remove();
 				}, 5000);
-			},
-			
-			/**
-			 * Override the default view remove method with custom actions
-			 */
-			remove: function () {
-				// remove container element from DOM
-				this.$el.remove();
 			}
 		}
 	);

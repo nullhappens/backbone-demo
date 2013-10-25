@@ -41,10 +41,9 @@ define([
 				// create new comment model
 				var comment = new CommentModel({});
 			
-				// render form view right after new button
-				FormView.model = comment;
-				FormView.bindEvents();
-				this.$el.after(FormView.render().$el);
+				
+				// request and reset instance of the FormView singleton
+				FormView.resetInstance(comment);				
 			
 				// add saved model to collection after form was submitted successfully
 				FormView.on('success', this.handleFormSuccess, this);
