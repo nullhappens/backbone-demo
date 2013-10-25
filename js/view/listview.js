@@ -21,7 +21,7 @@ define([
 			initialize: function () {
 				this.collection.on('add reset', this.render, this);
 			},
-			
+									
 			/**
 			 * Render comments using CommentView instances for each model in the collection.
 			 * @returns {CommentlistView} Returns the view instance itself, to allow chaining view commands.

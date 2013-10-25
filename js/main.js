@@ -26,7 +26,9 @@ requirejs.config({
 		formview: '../view/formview',
 		listview: '../view/listview',
 		newbuttonview: '../view/newbuttonview',
-		randombuttonview: '../view/randombuttonview'
+		randombuttonview: '../view/randombuttonview',
+        //fixtures
+        sampleData: '../fixtures/sampleData'
     }
 });
 

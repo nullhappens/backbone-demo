@@ -14,8 +14,9 @@ define([
 	'commentcollection',
 	'newbuttonview',
 	'randombuttonview',
-	'listview'	
-],function($,_,Backbone,CommentCollection,NewButtonView,RandomButtonView,CommentlistView){    
+	'listview',
+	'sampleData'
+],function($,_,Backbone,CommentCollection,NewButtonView,RandomButtonView,CommentlistView,sampleData){
 	var App = Backbone.View.extend({});
 
 	/**
@@ -25,9 +26,13 @@ define([
 		var app = new App({
 			el: $('#application')
 		});
+
 		// create empty comment collection
 		var collection = new CommentCollection();
-	
+
+		//prepopulate collection with data from sampleData module
+		collection.set(sampleData.data);
+		
 		// bind the NewButtonView to the already rendered 'newcomment' DOM element, we'll need to know the
 		// collection to work with so FormView can insert the new comment properly
 		new NewButtonView({collection: collection, el: app.$el.find('.newcomment')});
