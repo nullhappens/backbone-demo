@@ -92,7 +92,13 @@ define([
 			 * @returns {Boolean} Returns false to stop propagation
 			 */
 			delete: function () {
+				//remove the view
 				this.remove();
+
+				//remove the FormView if its rendered
+				if(FormView._rendered){
+					FormView.remove();
+				}
 				return false;
 			},
 			

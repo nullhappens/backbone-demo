@@ -43,8 +43,10 @@ define([
 			
 				
 				// request and reset instance of the FormView singleton
-				FormView.resetInstance(comment);				
-			
+				FormView.resetInstance(comment);
+				
+				// insert FormView instance after the comment container 
+				this.$el.after(FormView.render().$el); 
 				// add saved model to collection after form was submitted successfully
 				FormView.on('success', this.handleFormSuccess, this);
 			

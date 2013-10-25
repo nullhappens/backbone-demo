@@ -58,6 +58,9 @@ define([
 			 * @returns {FormView} Returns the view instance itself, to allow chaining view commands.
 			 */
 			render: function () {
+				//keep track if form is rendered
+				this._rendered = true;
+
 				var template = $('#form-template').text();
 				var template_vars = {
 					author: this.model.get('author'),
@@ -135,6 +138,8 @@ define([
 			 * Remove the form from the DOM
 			 */
 			remove: function () {
+				//keep track if form is rendered
+				this._rendered = false;
 				this.$el.remove();
 			},
 			/**
